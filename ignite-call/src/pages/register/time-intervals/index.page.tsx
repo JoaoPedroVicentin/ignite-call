@@ -3,6 +3,7 @@ import { convertTimeStringToMinutes } from "@/utils/convert-time-string-to-minut
 import { getWeekDays } from "@/utils/get-week-days";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Checkbox, Heading, MultiStep, Text, TextInput } from "@ignite-ui/react";
+import { useRouter } from "next/router";
 import { ArrowRight } from "phosphor-react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { z } from "zod";
@@ -62,6 +63,8 @@ export default function TimeInterval() {
         }
     })
 
+    const router = useRouter()
+
     const weekDays = getWeekDays()
 
     const { fields } = useFieldArray({
@@ -77,6 +80,8 @@ export default function TimeInterval() {
         await api.post('/users/time-intervals', {
             intervals,
           })
+
+        await router.push('/register/update-profile')
     }
 
     return (
