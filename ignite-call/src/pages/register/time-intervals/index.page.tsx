@@ -7,28 +7,31 @@ import { z } from "zod";
 import { Container, FormError, Header } from "../styles";
 import { IntervalBox, IntervalContainer, IntervalDay, IntervalInputs, IntervalItem } from "./styles";
 
-const timeIntervalsForSchema = z.object({
-    interval: z.array(z.object({
-        weekDay: z.number().min(0).max(6),
-        enabled: z.boolean(),
-        startTime: z.string(),
-        endTime: z.string(),
-    }))
-        .length(7)
-        .transform(intervals => intervals.filter(interval => interval.enabled))
-        .refine(intervals => intervals.length > 0, {
-            message: 'Você precisa selecionar pelo menos um dia na semana!'
-        })
-})
-
-type TimeIntervalsFormSchema = z.infer<typeof timeIntervalsForSchema>
+const timeIntervalsFormSchema = z.object({
+    intervals: z
+      .array(
+        z.object({
+          weekDay: z.number().min(0).max(6),
+          enabled: z.boolean(),
+          startTime: z.string(),
+          endTime: z.string(),
+        }),
+      )
+      .length(7)
+      .transform((intervals) => intervals.filter((interval) => interval.enabled))
+      .refine((intervals) => intervals.length > 0, {
+        message: 'Você precisa selecionar pelo menos um dia da semana',
+      }),
+  })
+  
+  type TimeIntervalsFormData = z.infer<typeof timeIntervalsFormSchema>
 
 export default function TimeInterval() {
 
     const { register, control, handleSubmit, watch, formState: {
         isSubmitting, errors
     } } = useForm({
-        resolver: zodResolver(timeIntervalsForSchema),
+        resolver: zodResolver(timeIntervalsFormSchema),
         defaultValues: {
             intervals: [
                 { weekDay: 0, enabled: false, startTime: '08:00', endTime: '18:00' },
@@ -51,7 +54,7 @@ export default function TimeInterval() {
 
     const intervals = watch('intervals')
 
-    async function handleSetTimeIntervals(data: TimeIntervalsFormSchema) {
+    async function handleSetTimeIntervals(data: TimeIntervalsFormData) {
         console.log(data)
     }
 
