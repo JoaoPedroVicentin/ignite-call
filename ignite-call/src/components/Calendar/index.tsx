@@ -71,7 +71,6 @@ export function Calendar({ selectedDate, onDateSelected }: CalendarProps) {
         if (!blockedDates) {
             return []
         }
-        console.log('calendarWeeks ~ blockedDates', blockedDates)
 
         const daysInMonthArray = Array.from({
             length: currentDate.daysInMonth()
@@ -126,8 +125,6 @@ export function Calendar({ selectedDate, onDateSelected }: CalendarProps) {
         return calendarWeeks
 
     }, [currentDate, blockedDates])
-
-    console.log(calendarWeeks)
 
     return (
         <CalendarContainer>
