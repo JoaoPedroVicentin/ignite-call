@@ -1,6 +1,6 @@
 # Ignite Call
 
-### O projeto consiste em sistema de agendamento em que o usuário poderá efetuar o cadastro com a sua conta do Google, selecionar os dias e horários disponíveis para marcar uma reunião e automaticamente reservar o horário no Google Calendar.
+### O projeto consiste em um sistema de agendamento em que o usuário poderá efetuar o cadastro com a sua conta do Google, selecionar os dias e horários disponíveis para marcar uma reunião e automaticamente reservar o horário no Google Calendar.
 <br>
 
  <h1 align="center">
